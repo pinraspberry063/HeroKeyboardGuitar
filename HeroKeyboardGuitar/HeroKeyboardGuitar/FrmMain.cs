@@ -1,3 +1,4 @@
+using AudioAnalyzing;
 using HeroKeyboardGuitar.Properties;
 using System;
 using System.Collections.Generic;
@@ -7,10 +8,11 @@ using System.Windows.Forms;
 
 namespace HeroKeyboardGuitar;
 
-public partial class FrmMain : Form {
-    private List<PictureBox> notes;
+internal partial class FrmMain : Form {
+    private List<Note> notes;
     private const float noteSpeed = 0.5f;
-    private Song curSong;
+    private Audio curSong;
+    private Score score;
 
     // for double buffering
     protected override CreateParams CreateParams {
@@ -26,15 +28,16 @@ public partial class FrmMain : Form {
     }
 
     public void FrmMain_Load(object sender, EventArgs e) {
-        lblScore.Text = "0";
+        score = new();
+        lblScore.Text = score.Amount.ToString();
         panBg.BackgroundImage = Game.GetInstance().GetBg();
         panBg.Height = (int)(Height * 0.8);
         curSong = Game.GetInstance().CurSong;
         notes = new();
-        foreach (var actionTime in curSong.Audio.ActionTimes) {
+        foreach (var actionTime in curSong.ActionTimes) {
             double x = actionTime * noteSpeed + picTarget.Left + picTarget.Width;
             const int noteSize = 50;
-            if (notes.Any(note => (x - note.Left) < noteSize / 2)) {
+            if (notes.Any(note => (x - note.Pic.Left) < noteSize / 2)) {
                 continue;
             }
             PictureBox picNote = new() {
@@ -44,14 +47,12 @@ public partial class FrmMain : Form {
                 Height = noteSize,
                 Top = picTarget.Top + picTarget.Height / 2 - noteSize / 2,
                 Left = (int)x,
-                Text = x.ToString(),
                 BackgroundImage = Resources.marker,
                 BackgroundImageLayout = ImageLayout.Stretch,
                 Anchor = AnchorStyles.Bottom,
             };
-            picNote.BringToFront();
             Controls.Add(picNote);
-            notes.Add(picNote);
+            notes.Add(new(picNote, x));
         }
         Timer tmrWaitThenPlay = new() {
             Interval = 1000,
@@ -66,21 +67,17 @@ public partial class FrmMain : Form {
     }
 
     private void tmrPlay_Tick(object sender, EventArgs e) {
-        int index = curSong.Audio.GetPosition();
+        int index = curSong.GetPosition();
         foreach (var note in notes) {
-            double x = double.Parse(note.Text);
-            x -= tmrPlay.Interval * (noteSpeed * 1.3);
-            note.Left = (int)x;
-            note.Text = x.ToString();
-            if (note.Left < picTarget.Left && note.BackColor == Color.Black) {
-                note.BackgroundImage = Resources.marker_miss;
-                note.BackColor = Color.Red;
+            note.Move(tmrPlay.Interval * (noteSpeed * 1.3));
+            if (note.CheckMiss(picTarget)) {
+                score.Miss();
             }
         }
-        if (index >= curSong.Audio.GetNumberOfSamples() - 1) {
+        if (index >= curSong.GetNumberOfSamples() - 1) {
             tmrPlay.Enabled = false;
             foreach (var note in notes) {
-                Controls.Remove(note);
+                Controls.Remove(note.Pic);
                 note.Dispose();
             }
         }
@@ -88,10 +85,9 @@ public partial class FrmMain : Form {
 
     private void FrmMain_KeyPress(object sender, KeyPressEventArgs e) {
         foreach (var note in notes) {
-            if (note.Left < picTarget.Left + picTarget.Width && note.Left + note.Width > picTarget.Left) {
-                note.BackgroundImage = Resources.marker_hit;
-                note.BackColor = Color.Green;
-                lblScore.Text = (int.Parse(lblScore.Text) + 1).ToString();
+            if (note.CheckHit(picTarget)) {
+                score.Add(1);
+                lblScore.Text = score.Amount.ToString();
                 lblScore.Font = new("Arial", 42);
                 break;
             }
@@ -107,16 +103,12 @@ public partial class FrmMain : Form {
     }
 
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e) {
-        Game.GetInstance().CurSong.Audio.Stop();
+        Game.GetInstance().CurSong.Stop();
     }
 
     private void tmrScoreShrink_Tick(object sender, EventArgs e) {
         if (lblScore.Font.Size > 20) {
             lblScore.Font = new("Arial", lblScore.Font.Size - 1);
         }
-    }
-
-    private void lblScore_Click(object sender, EventArgs e) {
-
     }
 }

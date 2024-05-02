@@ -61,7 +61,6 @@
             lblScore.TabIndex = 5;
             lblScore.Text = "0";
             lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            lblScore.Click += lblScore_Click;
             // 
             // tmrScoreShrink
             // 

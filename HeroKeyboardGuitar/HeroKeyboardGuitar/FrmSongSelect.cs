@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace HeroKeyboardGuitar {
-    public partial class FrmSongSelect : Form {
+    internal partial class FrmSongSelect : Form {
         private readonly string SONGS_ROOT_PATH = $"{Application.StartupPath}../../../Songs/";
 
         public FrmSongSelect() {
@@ -21,7 +21,7 @@ namespace HeroKeyboardGuitar {
                 var song = Path.GetFileNameWithoutExtension(songFilePath);
                 var songName = song.Split('_')[0];
                 GenreType genre;
-                if (!Enum.TryParse<GenreType>(song.Split('_')[1], true, out genre)) {
+                if (!Enum.TryParse(song.Split('_')[1], true, out genre)) {
                     genre = GenreType.COUNTRY;
                 }
                 Button btnSong = new() {
