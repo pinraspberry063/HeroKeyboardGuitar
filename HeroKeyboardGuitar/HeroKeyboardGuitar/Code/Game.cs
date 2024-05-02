@@ -7,18 +7,18 @@ using System.Drawing;
 namespace HeroKeyboardGuitar;
 
 /// <summary>
-/// 
+/// Holds 
 /// </summary>
 public class Game {
     private Dictionary<GenreType, Bitmap> bgMap;
 
     /// <summary>
-    /// 
+    /// Current song being played
     /// </summary>
     public Audio CurSong { get; private set; }
 
     /// <summary>
-    /// 
+    /// Current genre of the song being played
     /// </summary>
     public GenreType CurSongGenre { get; private set; }
 
@@ -36,52 +36,45 @@ public class Game {
     }
 
     /// <summary>
-    /// 
+    /// Grabs the singleton instance
     /// </summary>
-    /// <returns></returns>
+    /// <returns>The singleton instance</returns>
     public static Game GetInstance() {
         return instance;
     }
 
     /// <summary>
-    /// 
+    /// Retrieves the map of rewards for scores or streaks.
+    /// Current not used
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Map of rewards by score or streak</returns>
     public static Dictionary<int, Action> GetRewardMap() {
         //return instance.CurSong.re
         return null;
     }
 
     /// <summary>
-    /// 
+    /// Retrieves the background image associated with the current song's genre
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A background image</returns>
     public Bitmap GetBg() {
         return bgMap.GetValueOrDefault(CurSongGenre, null);
     }
 
     /// <summary>
-    /// 
+    /// Retrieves the background image for the given genre
     /// </summary>
-    /// <param name="genre"></param>
-    /// <returns></returns>
+    /// <param name="genre">Genre to use</param>
+    /// <returns>A background image</returns>
     public static Bitmap GetBg(GenreType genre) {
         return instance.bgMap[genre];
     }
 
     /// <summary>
-    /// 
+    /// Creates an Audio object based on the given file path and holds the given genre so we can refer to both later
     /// </summary>
-    /// <param name="song"></param>
-    public static void SetCurSong(Audio song) {
-        GetInstance().CurSong = song;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="songFilePath"></param>
-    /// <param name="genre"></param>
+    /// <param name="songFilePath">Full absolute path to a wav file</param>
+    /// <param name="genre">Genre of the song</param>
     public static void SetCurSong(string songFilePath, GenreType genre) {
         instance.CurSong = new(songFilePath);
         instance.CurSongGenre = genre;
