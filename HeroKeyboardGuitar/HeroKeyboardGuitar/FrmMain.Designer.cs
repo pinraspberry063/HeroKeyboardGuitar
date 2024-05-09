@@ -22,7 +22,8 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             components = new System.ComponentModel.Container();
             tmrPlay = new System.Windows.Forms.Timer(components);
             picTarget = new System.Windows.Forms.PictureBox();
@@ -41,7 +42,11 @@
             // picTarget
             // 
             picTarget.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            picTarget.BackgroundImage = Properties.Resources._default;
+            if (Game.GetInstance().mode == "Color Blind Mode")
+            {
+                picTarget.BackgroundImage = Properties.Resources.defaultcb;
+            }
+            else { picTarget.BackgroundImage = Properties.Resources._default; }
             picTarget.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             picTarget.Location = new System.Drawing.Point(372, 498);
             picTarget.Name = "picTarget";
@@ -76,6 +81,7 @@
             panBg.Name = "panBg";
             panBg.Size = new System.Drawing.Size(1237, 480);
             panBg.TabIndex = 6;
+            
             // 
             // FrmMain
             // 
