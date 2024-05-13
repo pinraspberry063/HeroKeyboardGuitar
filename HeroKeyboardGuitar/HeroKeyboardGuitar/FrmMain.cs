@@ -39,6 +39,10 @@ internal partial class FrmMain : Form
         panBg.Height = (int)(Height * 0.8);
         curSong = Game.GetInstance().CurSong;
         notes = new();
+        if (Game.GetInstance().mode == "Color Blind Mode")
+        {
+            picTarget.BackgroundImage = Properties.Resources.defaultcb;
+        }
         foreach (var actionTime in curSong.ActionTimes)
         {
             double x = actionTime * noteSpeed + picTarget.Left + picTarget.Width;

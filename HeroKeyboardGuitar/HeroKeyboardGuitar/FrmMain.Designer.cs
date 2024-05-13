@@ -42,11 +42,8 @@
             // picTarget
             // 
             picTarget.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            if (Game.GetInstance().mode == "Color Blind Mode")
-            {
-                picTarget.BackgroundImage = Properties.Resources.defaultcb;
-            }
-            else { picTarget.BackgroundImage = Properties.Resources._default; }
+            
+            picTarget.BackgroundImage = Properties.Resources._default;
             picTarget.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             picTarget.Location = new System.Drawing.Point(372, 498);
             picTarget.Name = "picTarget";
@@ -105,6 +102,7 @@
             panBg.ResumeLayout(false);
             ResumeLayout(false);
         }
+
 
         #endregion
         private System.Windows.Forms.Timer tmrPlay;
