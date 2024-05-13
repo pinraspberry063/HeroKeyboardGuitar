@@ -30,6 +30,7 @@ internal partial class FrmMain : Form {
     public void FrmMain_Load(object sender, EventArgs e) {
         score = new();
         lblScore.Text = score.Amount.ToString();
+        lblStreak.Text = "COMBO: " + score.Streak.ToString();
         panBg.BackgroundImage = Game.GetInstance().GetBg();
         panBg.Height = (int)(Height * 0.8);
         curSong = Game.GetInstance().CurSong;
@@ -72,6 +73,9 @@ internal partial class FrmMain : Form {
             note.Move(tmrPlay.Interval * (noteSpeed * 1.3));
             if (note.CheckMiss(picTarget)) {
                 score.Miss();
+                streakBar.Value = 0;
+                lblStreak.Font = new("Arial", 10);
+                lblStreak.Text = "COMBO: " + score.Streak.ToString();
             }
         }
         if (index >= curSong.GetNumberOfSamples() - 1) {
@@ -87,6 +91,12 @@ internal partial class FrmMain : Form {
         foreach (var note in notes) {
             if (note.CheckHit(picTarget)) {
                 score.Add(1);
+                streakBar.PerformStep();
+                // Increase streak font size with each hit
+                if (lblStreak.Font.Size < 60) {
+                    lblStreak.Font = new("Arial", lblStreak.Font.Size + 2);
+                }
+                lblStreak.Text = "COMBO: " + score.Streak.ToString();
                 lblScore.Text = score.Amount.ToString();
                 lblScore.Font = new("Arial", 42);
                 break;

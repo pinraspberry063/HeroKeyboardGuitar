@@ -36,8 +36,16 @@ public class Score {
     /// </summary>
     /// <param name="amount">Amount to add</param>
     public void Add(int amount) {
-        Amount += amount;
-        Streak++;
+        if (Streak >= 5)
+        {
+            Amount += amount * 2;
+            Streak++;
+        }
+        else
+        {
+            Amount += amount;
+            Streak++;
+        }
     }
 
     /// <summary>
