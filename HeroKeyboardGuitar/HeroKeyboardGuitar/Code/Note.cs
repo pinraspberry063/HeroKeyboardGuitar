@@ -31,6 +31,7 @@ public class Note {
     /// <summary>
     /// Current state of the note
     /// </summary>
+    public float NoteSpeed = 0.5f;
     public NoteState State { get; private set; }
 
     /// <summary>

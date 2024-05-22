@@ -56,6 +56,7 @@
             DifficultyBox.Name = "DifficultyBox";
             DifficultyBox.Size = new System.Drawing.Size(182, 33);
             DifficultyBox.TabIndex = 1;
+            DifficultyBox.SelectionChangeCommitted += changeDifficulty;
             // 
             // Difficulty
             // 
@@ -90,7 +91,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.ComboBox DifficultyBox;
         private System.Windows.Forms.Label Difficulty;
+        public System.Windows.Forms.ComboBox DifficultyBox;
     }
 }
