@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,14 @@ namespace HeroKeyboardGuitar
     public partial class FrmMenu : Form
     {
         public static Dictionary<string, string> settings = new();
+        private readonly string SONGS_ROOT_PATH = $"{Application.StartupPath}../../../Songs/";
+        private GenreType genre;
         public FrmMenu()
         {
             settings.Clear();
             InitializeComponent();
         }
-
+        
         public static string getSettings(string key)
         {
             return settings[key];
@@ -31,7 +34,44 @@ namespace HeroKeyboardGuitar
             FrmSongSelect frmSongSelect = new();
             frmSongSelect.Show();
         }
+        private void btnAddSong_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "WAV files (*.wav)|*.wav";
+            openFileDialog.Title = "Select a .wav song file!";
 
-        
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+                FrmGenreSelect genreSelect = new ();
+                if (genreSelect.ShowDialog() == DialogResult.OK)
+                {
+                    
+
+                    // Make sure chosen file has a .wav extension
+                    if (Path.GetExtension(filePath).ToLower() == ".wav")
+                    {
+                        string fileName = Path.GetFileName(filePath);
+                        string destinationPath = Path.Combine(SONGS_ROOT_PATH, fileName);
+
+                        try
+                        {
+                            // Move the song file to the "Songs" folder
+                            File.Move(filePath, destinationPath);
+                            MessageBox.Show("Song added!");
+                        }
+                        catch (Exception exc)
+                        {
+                            MessageBox.Show("Error moving file: " + exc.Message);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("You must select a .wav file.");
+                    }
+                }
+            }
+        }
+
     }
 }
