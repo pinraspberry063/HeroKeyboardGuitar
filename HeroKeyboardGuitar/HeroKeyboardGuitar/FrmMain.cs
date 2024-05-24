@@ -32,8 +32,6 @@ internal partial class FrmMain : Form
         InitializeComponent();
     }
 
-    public void FrmMain_Load(object sender, EventArgs e)
-    {
     public void FrmMain_Load(object sender, EventArgs e) {
         noteSpeed = FrmTitle.NoteSpeed;
         score = new();
