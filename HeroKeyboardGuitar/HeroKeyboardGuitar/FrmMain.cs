@@ -32,8 +32,10 @@ internal partial class FrmMain : Form
         InitializeComponent();
     }
 
-    public void FrmMain_Load(object sender, EventArgs e) {
-        noteSpeed = FrmTitle.NoteSpeed;
+    public void FrmMain_Load(object sender, EventArgs e)
+    {
+   // public void FrmMain_Load(object sender, EventArgs e) {
+        noteSpeed = FrmMenu.NoteSpeed;
         score = new();
         lblScore.Text = score.Amount.ToString();
         panBg.BackgroundImage = Game.GetInstance().GetBg();
