@@ -43,6 +43,7 @@ namespace HeroKeyboardGuitar
             ModeDropDown.Name = "ModeDropDown";
             ModeDropDown.Size = new System.Drawing.Size(200, 23);
             ModeDropDown.TabIndex = 1;
+            
             // 
             // btnplay
             // 

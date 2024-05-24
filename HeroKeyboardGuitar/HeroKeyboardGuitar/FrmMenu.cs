@@ -14,6 +14,7 @@ namespace HeroKeyboardGuitar
     public partial class FrmMenu : Form
     {
         public static Dictionary<string, string> settings = new();
+        public static FrmSongSelect SongMenu;
         public FrmMenu()
         {
             settings.Clear();
@@ -28,10 +29,9 @@ namespace HeroKeyboardGuitar
         private void btnplay_Click(object sender, EventArgs e)
         {
             settings["mode"] = ModeDropDown.Text;
-            FrmSongSelect frmSongSelect = new();
-            frmSongSelect.Show();
+            SongMenu = new FrmSongSelect(); 
+            SongMenu.Show();
         }
 
-        
     }
 }

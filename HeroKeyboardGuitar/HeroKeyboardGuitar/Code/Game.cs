@@ -3,6 +3,7 @@ using HeroKeyboardGuitar.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 
 namespace HeroKeyboardGuitar;
 
@@ -17,6 +18,8 @@ public class Game {
     /// </summary>
     public Audio CurSong { get; private set; }
     public string mode;
+    public string CurSongName { get; set; }
+
 
     /// <summary>
     /// Current genre of the song being played
@@ -97,5 +100,8 @@ public class Game {
     public static void SetCurSong(string songFilePath, GenreType genre) {
         instance.CurSong = new(songFilePath);
         instance.CurSongGenre = genre;
+        var song = Path.GetFileNameWithoutExtension(songFilePath);
+        instance.CurSongName = song.Split('_')[0]; 
+
     }
 }

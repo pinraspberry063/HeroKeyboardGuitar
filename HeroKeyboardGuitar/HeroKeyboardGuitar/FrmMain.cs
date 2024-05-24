@@ -3,6 +3,7 @@ using HeroKeyboardGuitar.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -144,6 +145,20 @@ internal partial class FrmMain : Form
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
     {
         Game.GetInstance().CurSong.Stop();
+        var HighScore_File = $"{Application.StartupPath}../../../HighScores/" + Game.GetInstance().CurSongName + ".txt";
+        StreamReader sr = new StreamReader(HighScore_File);
+        var curr_hs =Int32.Parse(sr.ReadLine());
+        sr.Close();
+        if (curr_hs < Int32.Parse(lblScore.Text))
+        {
+            StreamWriter sw = new StreamWriter(HighScore_File, false);
+            sw.Write(lblScore.Text.ToString());
+            sw.Close();
+        }
+        // Reload the SongSelect Menu upon finishing a song
+        FrmMenu.SongMenu.Close();
+        FrmMenu.SongMenu = new FrmSongSelect();
+        FrmMenu.SongMenu.Show();
     }
 
     private void tmrScoreShrink_Tick(object sender, EventArgs e)
