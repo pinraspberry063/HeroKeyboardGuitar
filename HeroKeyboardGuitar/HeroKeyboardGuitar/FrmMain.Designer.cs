@@ -96,7 +96,6 @@
             FormClosing += FrmMain_FormClosing;
             Load += FrmMain_Load;
             KeyDown += FrmMain_KeyDown;
-            KeyPress += FrmMain_KeyPress;
             KeyUp += FrmMain_KeyUp;
             ((System.ComponentModel.ISupportInitialize)picTarget).EndInit();
             panBg.ResumeLayout(false);

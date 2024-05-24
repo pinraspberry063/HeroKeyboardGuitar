@@ -3,6 +3,7 @@ using HeroKeyboardGuitar.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -14,6 +15,7 @@ internal partial class FrmMain : Form
     public float noteSpeed;
     private Audio curSong;
     private Score score;
+    private Timer time;
 
 
     // for double buffering
@@ -109,44 +111,75 @@ internal partial class FrmMain : Form
         }
     }
 
-    private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
-    {
-        foreach (var note in notes)
-        {
-            if (note.CheckHit(picTarget))
-            {
-                score.Add(1);
-                lblScore.Text = score.Amount.ToString();
-                lblScore.Font = new("Arial", 42);
-                break;
-            }
-        }
-    }
+  
+
+  
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e)
     {
+        // used to determine if key is being held down
+        time = new()
+        {
+            Interval = 10,
+            Enabled = true,
+        };
+        time.Start();
+        
         if (Game.GetInstance().mode == "Color Blind Mode")
         {
             picTarget.BackgroundImage = Resources.pressedcb;
         }
         else { picTarget.BackgroundImage = Resources.pressed; }
+        
+        
          
 
     }
 
     private void FrmMain_KeyUp(object sender, KeyEventArgs e)
     {
+        
         if (Game.GetInstance().mode == "Color Blind Mode")
         {
             picTarget.BackgroundImage = Resources.defaultcb;
         }
         else { picTarget.BackgroundImage = Resources._default; }
+
+        // Checks to see of the key is being held down or if it is actually being clicked
+        if (time.Interval < 1000)
+        {
+                foreach (var note in notes)
+                {
+                    if (note.CheckHit(picTarget))
+                    {
+                        score.Add(1);
+                        lblScore.Text = score.Amount.ToString();
+                        lblScore.Font = new("Arial", 42);
+                        break;
+
+                    }
+                }
+         }
         
     }
 
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
     {
         Game.GetInstance().CurSong.Stop();
+        var HighScore_File = $"{Application.StartupPath}../../../HighScores/" + Game.GetInstance().CurSongName + ".txt";
+        StreamReader sr = new StreamReader(HighScore_File);
+        var curr_hs =Int32.Parse(sr.ReadLine());
+        sr.Close();
+        if (curr_hs < Int32.Parse(lblScore.Text))
+        {
+            StreamWriter sw = new StreamWriter(HighScore_File, false);
+            sw.Write(lblScore.Text.ToString());
+            sw.Close();
+        }
+        // Reload the SongSelect Menu upon finishing a song
+        FrmMenu.SongMenu.Close();
+        FrmMenu.SongMenu = new FrmSongSelect();
+        FrmMenu.SongMenu.Show();
     }
 
     private void tmrScoreShrink_Tick(object sender, EventArgs e)

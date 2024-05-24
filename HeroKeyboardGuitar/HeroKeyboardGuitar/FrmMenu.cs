@@ -18,6 +18,7 @@ namespace HeroKeyboardGuitar
         public static Dictionary<string, string> settings = new();
         private readonly string SONGS_ROOT_PATH = $"{Application.StartupPath}../../../Songs/";
         private GenreType genre;
+        public static FrmSongSelect SongMenu;
         public FrmMenu()
         {
             settings.Clear();
@@ -32,8 +33,8 @@ namespace HeroKeyboardGuitar
         private void btnplay_Click(object sender, EventArgs e)
         {
             settings["mode"] = ModeDropDown.Text;
-            FrmSongSelect frmSongSelect = new();
-            frmSongSelect.Show();
+            SongMenu = new FrmSongSelect(); 
+            SongMenu.Show();
         }
         private void btnAddSong_Click(object sender, EventArgs e)
         {

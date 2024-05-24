@@ -75,7 +75,7 @@ public class Note {
     /// <param name="picTarget">PictureBox object for player's target zone</param>
     /// <returns>True if note was just hit, false if it wasn't hit or was already previously hit</returns>
     public bool CheckHit(PictureBox picTarget) {
-        if (Pic.Left < picTarget.Left + picTarget.Width && Pic.Left + Pic.Width > picTarget.Left && State == NoteState.TRAVELING) {
+        if (Pic.Left <= picTarget.Left + picTarget.Width && Pic.Left + Pic.Width > picTarget.Left && State == NoteState.TRAVELING) {
             if (Game.GetInstance().mode == "Color Blind Mode")
             {
                 Pic.BackgroundImage = Resources.marker_hitcb;
