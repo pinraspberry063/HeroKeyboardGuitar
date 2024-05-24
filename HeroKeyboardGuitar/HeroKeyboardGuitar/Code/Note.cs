@@ -75,12 +75,8 @@ public class Note {
     /// <param name="picTarget">PictureBox object for player's target zone</param>
     /// <returns>True if note was just hit, false if it wasn't hit or was already previously hit</returns>
     public bool CheckHit(PictureBox picTarget) {
-        if (Pic.Left <= picTarget.Left + picTarget.Width && Pic.Left + Pic.Width > picTarget.Left && State == NoteState.TRAVELING) {
-            if (Game.GetInstance().mode == "Color Blind Mode")
-            {
-                Pic.BackgroundImage = Resources.marker_hitcb;
-            }
-            else { Pic.BackgroundImage = Resources.marker_hit; }
+        if (Pic.Left < picTarget.Left + picTarget.Width && Pic.Left + Pic.Width > picTarget.Left && State == NoteState.TRAVELING) {
+            Pic.BackgroundImage = Resources.marker_hit;
             State = NoteState.HIT;
             return true;
         }
@@ -97,11 +93,7 @@ public class Note {
     /// <returns>True if note was just missed, false if it wasn't missed or was already previously missed</returns>
     public bool CheckMiss(PictureBox picTarget) {
         if (Pic.Left < picTarget.Left && State == NoteState.TRAVELING) {
-            if (Game.GetInstance().mode == "Color Blind Mode")
-            {
-                Pic.BackgroundImage = Resources.marker_misscb;
-            }
-            else { Pic.BackgroundImage = Resources.marker_miss; }
+            Pic.BackgroundImage = Resources.marker_miss;
             State = NoteState.MISS;
             return true;
         }

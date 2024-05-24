@@ -121,74 +121,35 @@
   <data name="classical" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\classical.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="classicalcb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\classicalcb.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="country" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\country.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="countrycb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\countrycb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="defaultcb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defaultcb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="marker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\marker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="markercb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\markercb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="marker_hit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\marker hit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="marker_hitcb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\marker hitcb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="marker_miss" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\marker miss.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="marker_misscb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\marker misscb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="metal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\metal.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="metalcb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\metalcb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pop.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="popcb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\popcb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pressedcb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pressedcb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rnb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rnb.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="rnbcb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rnbcb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="rock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rock.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="rockcb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rockcb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="title" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\title.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="titlecb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\titlecb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="titlecb_fw" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\titlecb.fw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
