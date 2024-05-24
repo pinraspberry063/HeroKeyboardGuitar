@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="HeroKeyboardGuitar.Game">
+    <Position X="10" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAIAAAAAAAAAAAABABAAAgAAQAAAAAAAAA=</HashCode>
+      <FileName>Code\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeroKeyboardGuitar.Note">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Note.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeroKeyboardGuitar.Score">
+    <Position X="3.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAKAACAAAAAAAAAAAAAAAACAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Code\Score.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeroKeyboardGuitar.Audio">
+    <Position X="0.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAACAAAAAAAAIAAAAgACAAAEAEgAAAQAQAAAA=</HashCode>
+      <FileName>Code\Song.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeroKeyboardGuitar.Song">
+    <Position X="8.25" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAEAAQAAAAAAAAAMAAAAAAAAAAEAAgAAAAAAAIAA=</HashCode>
+      <FileName>Code\Song.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeroKeyboardGuitar.FrmMain">
+    <Position X="3.75" Y="3.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACABABACABCAAIECgIAAAAQEBAAAAAABACA=</HashCode>
+      <FileName>FrmMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeroKeyboardGuitar.Program">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="HeroKeyboardGuitar.GenreType">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAgAAAACAAAAAAQAAACAAAAABAAAA=</HashCode>
+      <FileName>Code\GenreType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
