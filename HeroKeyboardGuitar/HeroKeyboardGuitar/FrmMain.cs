@@ -16,7 +16,9 @@ internal partial class FrmMain : Form
     private Audio curSong;
     private Score score;
     private Timer time;
-
+    private int xPos;
+    public PictureBox currTarget = new();
+   
 
     // for double buffering
     protected override CreateParams CreateParams
@@ -28,31 +30,33 @@ internal partial class FrmMain : Form
             return cp;
         }
     }
+    
 
     public FrmMain()
     {
         InitializeComponent();
     }
 
-    public void FrmMain_Load(object sender, EventArgs e)
-    {
-   // public void FrmMain_Load(object sender, EventArgs e) {
-        noteSpeed = FrmMenu.NoteSpeed;
+    
+    public void FrmMain_Load(object sender, EventArgs e) {
+        noteSpeed = FrmTitle.NoteSpeed;
         score = new();
         lblScore.Text = score.Amount.ToString();
         panBg.BackgroundImage = Game.GetInstance().GetBg();
         panBg.Height = (int)(Height * 0.8);
         curSong = Game.GetInstance().CurSong;
+        currTarget = pictargets[""];
         notes = new();
+        xPos = currTarget.Left + currTarget.Width / 2;
         if (Game.GetInstance().mode == "Color Blind Mode")
         {
-            picTarget.BackgroundImage = Properties.Resources.defaultcb;
+            currTarget.BackgroundImage = Properties.Resources.defaultcb;
         }
         foreach (var actionTime in curSong.ActionTimes)
         {
-            double x = actionTime * noteSpeed + picTarget.Left + picTarget.Width;
+            double yPos = (actionTime * noteSpeed - currTarget.Bottom - currTarget.Height);
             const int noteSize = 50;
-            if (notes.Any(note => (x - note.Pic.Left) < noteSize / 2))
+            if (notes.Any(note => (yPos - note.Pic.Bottom) < noteSize / 2))
             {
                 continue;
             }
@@ -62,14 +66,16 @@ internal partial class FrmMain : Form
                 ForeColor = Color.Black,
                 Width = noteSize,
                 Height = noteSize,
-                Top = picTarget.Top + picTarget.Height / 2 - noteSize / 2,
-                Left = (int)x,
+                Top = (int)yPos,
+                Left = xPos - noteSize / 2,
                 BackgroundImage = Resources.marker,
                 BackgroundImageLayout = ImageLayout.Stretch,
                 Anchor = AnchorStyles.Bottom,
+                
             };
             Controls.Add(picNote);
-            notes.Add(new(picNote, x));
+            picNote.BringToFront();
+            notes.Add(new(picNote, xPos - noteSize / 2, yPos ));
             if(Game.GetInstance().mode == "Color Blind Mode")
             {
                 picNote.BackgroundImage = Resources.markercb;
@@ -95,7 +101,7 @@ internal partial class FrmMain : Form
         foreach (var note in notes)
         {
             note.Move(tmrPlay.Interval * (noteSpeed * 1.3));
-            if (note.CheckMiss(picTarget))
+            if (note.CheckMiss(currTarget))
             {
                 score.Miss();
             }
@@ -127,9 +133,9 @@ internal partial class FrmMain : Form
         
         if (Game.GetInstance().mode == "Color Blind Mode")
         {
-            picTarget.BackgroundImage = Resources.pressedcb;
+            currTarget.BackgroundImage = Resources.pressedcb;
         }
-        else { picTarget.BackgroundImage = Resources.pressed; }
+        else { currTarget.BackgroundImage = Resources.pressed; }
         
         
          
@@ -141,20 +147,21 @@ internal partial class FrmMain : Form
         
         if (Game.GetInstance().mode == "Color Blind Mode")
         {
-            picTarget.BackgroundImage = Resources.defaultcb;
+            currTarget.BackgroundImage = Resources.defaultcb;
         }
-        else { picTarget.BackgroundImage = Resources._default; }
+        else { currTarget.BackgroundImage = Resources._default; }
 
         // Checks to see of the key is being held down or if it is actually being clicked
         if (time.Interval < 1000)
         {
                 foreach (var note in notes)
                 {
-                    if (note.CheckHit(picTarget))
+                    if (note.CheckHit(currTarget))
                     {
                         score.Add(1);
                         lblScore.Text = score.Amount.ToString();
                         lblScore.Font = new("Arial", 42);
+                        
                         break;
 
                     }

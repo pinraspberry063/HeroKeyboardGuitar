@@ -1,10 +1,15 @@
-﻿namespace HeroKeyboardGuitar {
+﻿using ScottPlot.Colormaps;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace HeroKeyboardGuitar {
     partial class FrmMain {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
+        
         /// <summary>
         ///  Clean up any resources being used.
         /// </summary>
@@ -26,11 +31,12 @@
         {
             components = new System.ComponentModel.Container();
             tmrPlay = new System.Windows.Forms.Timer(components);
-            picTarget = new System.Windows.Forms.PictureBox();
             lblScore = new System.Windows.Forms.Label();
+            pictargets = new();
             tmrScoreShrink = new System.Windows.Forms.Timer(components);
             panBg = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)picTarget).BeginInit();
+            foreach (KeyValuePair<string, PictureBox> picTarget in pictargets)
+                ((System.ComponentModel.ISupportInitialize)picTarget.Value).BeginInit();
             panBg.SuspendLayout();
             SuspendLayout();
             // 
@@ -39,17 +45,44 @@
             tmrPlay.Interval = 50;
             tmrPlay.Tick += tmrPlay_Tick;
             // 
-            // picTarget
+            // picTargetgreen
             // 
-            picTarget.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            
-            picTarget.BackgroundImage = Properties.Resources._default;
-            picTarget.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            picTarget.Location = new System.Drawing.Point(372, 498);
-            picTarget.Name = "picTarget";
-            picTarget.Size = new System.Drawing.Size(120, 120);
-            picTarget.TabIndex = 3;
-            picTarget.TabStop = false;
+            var picTargetG = new System.Windows.Forms.PictureBox();
+            picTargetG.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            picTargetG.BackgroundImage = Properties.Resources._default;
+            picTargetG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            picTargetG.Location = new System.Drawing.Point(372, 498);
+            picTargetG.Name = "picTargetG";
+            picTargetG.Size = new System.Drawing.Size(120, 120);
+            picTargetG.TabIndex = 3;
+            picTargetG.TabStop = false;
+            pictargets[""] = picTargetG;
+            // 
+            // picTargetred
+            // 
+            var picTargetR = new System.Windows.Forms.PictureBox();
+            picTargetR.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            picTargetR.BackgroundImage = Properties.Resources.default_red;
+            picTargetR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            picTargetR.Location = new System.Drawing.Point(572, 498);
+            picTargetR.Name = "picTargetR";
+            picTargetR.Size = new System.Drawing.Size(120, 120);
+            picTargetR.TabIndex = 3;
+            picTargetR.TabStop = false;
+            pictargets["red"] = picTargetR;
+            // 
+            // picTargetred
+            // 
+            var picTargetB = new System.Windows.Forms.PictureBox();
+            picTargetB.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            picTargetB.BackgroundImage = Properties.Resources.default_blue;
+            picTargetB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            picTargetB.Location = new System.Drawing.Point(772, 498);
+            picTargetB.Name = "picTargetB";
+            picTargetB.Size = new System.Drawing.Size(120, 120);
+            picTargetB.TabIndex = 3;
+            picTargetB.TabStop = false;
+            pictargets["blue"] = picTargetB;
             // 
             // lblScore
             // 
@@ -57,7 +90,7 @@
             lblScore.Dock = System.Windows.Forms.DockStyle.Bottom;
             lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             lblScore.ForeColor = System.Drawing.Color.White;
-            lblScore.Location = new System.Drawing.Point(0, 391);
+            lblScore.Location = new System.Drawing.Point(0, 50);
             lblScore.Name = "lblScore";
             lblScore.Size = new System.Drawing.Size(1237, 89);
             lblScore.TabIndex = 5;
@@ -77,6 +110,7 @@
             panBg.Location = new System.Drawing.Point(0, 0);
             panBg.Name = "panBg";
             panBg.Size = new System.Drawing.Size(1237, 480);
+            panBg.SendToBack();
             panBg.TabIndex = 6;
             
             // 
@@ -88,7 +122,8 @@
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             ClientSize = new System.Drawing.Size(1237, 644);
             Controls.Add(panBg);
-            Controls.Add(picTarget);
+            foreach (KeyValuePair< string, PictureBox> picTarget in pictargets)
+                Controls.Add(picTarget.Value);
             Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Name = "FrmMain";
             Text = "Play Song";
@@ -97,7 +132,8 @@
             Load += FrmMain_Load;
             KeyDown += FrmMain_KeyDown;
             KeyUp += FrmMain_KeyUp;
-            ((System.ComponentModel.ISupportInitialize)picTarget).EndInit();
+            foreach (KeyValuePair<string, PictureBox> picTarget in pictargets)
+                ((System.ComponentModel.ISupportInitialize)picTarget.Value).EndInit();
             panBg.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -105,7 +141,7 @@
 
         #endregion
         private System.Windows.Forms.Timer tmrPlay;
-        private System.Windows.Forms.PictureBox picTarget;
+        public static Dictionary<string, PictureBox> pictargets;
         private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.Timer tmrScoreShrink;
         private System.Windows.Forms.Panel panBg;

@@ -39,16 +39,18 @@ public class Note {
     public PictureBox Pic { get; private set; }
 
     private double xPos;
+    private double yPos;
 
     /// <summary>
     /// Ctor. Sets state to traveling
     /// </summary>
     /// <param name="pic">PictureBox for visual representation</param>
     /// <param name="xPos">Starting x position</param>
-    public Note(PictureBox pic, double xPos) {
+    public Note(PictureBox pic, double xPos, double yPos) {
         Pic = pic;
         State = NoteState.TRAVELING;
         this.xPos = xPos;
+        this.yPos = yPos;
     }
 
     /// <summary>
@@ -64,8 +66,9 @@ public class Note {
     /// </summary>
     /// <param name="amount">Amount to move to the left</param>
     public void Move(double amount) {
-        xPos -= amount;
+        yPos += amount;
         Pic.Left = (int)xPos;
+        Pic.Top = (int)yPos;
     }
 
     /// <summary>
@@ -75,7 +78,7 @@ public class Note {
     /// <param name="picTarget">PictureBox object for player's target zone</param>
     /// <returns>True if note was just hit, false if it wasn't hit or was already previously hit</returns>
     public bool CheckHit(PictureBox picTarget) {
-        if (Pic.Left <= picTarget.Left + picTarget.Width && Pic.Left + Pic.Width > picTarget.Left && State == NoteState.TRAVELING) {
+        if (Pic.Left <= picTarget.Top + picTarget.Height && Pic.Top + Pic.Height > picTarget.Top && State == NoteState.TRAVELING) {
             if (Game.GetInstance().mode == "Color Blind Mode")
             {
                 Pic.BackgroundImage = Resources.marker_hitcb;
