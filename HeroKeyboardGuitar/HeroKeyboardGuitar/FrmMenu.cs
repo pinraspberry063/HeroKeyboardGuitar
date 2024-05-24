@@ -46,7 +46,6 @@ namespace HeroKeyboardGuitar
             {
                 string filePath = openFileDialog.FileName;
                 FrmGenreSelect genreSelect = new();
-                genreSelect.ShowDialog();
                 if (genreSelect.ShowDialog() == DialogResult.OK)
                 {
 
