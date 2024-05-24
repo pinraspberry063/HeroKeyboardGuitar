@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HeroKeyboardGuitar
 {
@@ -44,15 +45,19 @@ namespace HeroKeyboardGuitar
             {
                 string filePath = openFileDialog.FileName;
                 FrmGenreSelect genreSelect = new ();
-                if (genreSelect.ShowDialog() == DialogResult.OK)
-                {
+                genreSelect.ShowDialog();
+                if (genreSelect.ShowDialog() == DialogResult.OK) {
                     
 
                     // Make sure chosen file has a .wav extension
                     if (Path.GetExtension(filePath).ToLower() == ".wav")
                     {
-                        string fileName = Path.GetFileName(filePath);
-                        string destinationPath = Path.Combine(SONGS_ROOT_PATH, fileName);
+                        // Formating song file by adding "_GENRE" to the end of the file name 
+                        string songNameWithGenre = Path.GetFileNameWithoutExtension(filePath) +
+                                 "_" +
+                                 genreSelect.selectedGenre +
+                                 Path.GetExtension(filePath);
+                        string destinationPath = Path.Combine(SONGS_ROOT_PATH, songNameWithGenre);
 
                         try
                         {
