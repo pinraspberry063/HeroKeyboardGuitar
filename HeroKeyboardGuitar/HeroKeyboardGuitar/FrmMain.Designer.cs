@@ -106,6 +106,8 @@ namespace HeroKeyboardGuitar {
             // panBg
             // 
             panBg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            panBg.Controls.Add(streakBar);
+            panBg.Controls.Add(lblStreak);
             panBg.Controls.Add(lblScore);
             panBg.Dock = System.Windows.Forms.DockStyle.Top;
             panBg.Location = new System.Drawing.Point(0, 0);
@@ -115,9 +117,32 @@ namespace HeroKeyboardGuitar {
             panBg.TabIndex = 6;
             
             // 
+            // streakBar
+            // 
+            streakBar.Location = new System.Drawing.Point(155, 219);
+            streakBar.MarqueeAnimationSpeed = 1;
+            streakBar.Maximum = 5;
+            streakBar.Name = "streakBar";
+            streakBar.Size = new System.Drawing.Size(277, 18);
+            streakBar.Step = 1;
+            streakBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            streakBar.TabIndex = 7;
+            // 
+            // lblStreak
+            // 
+            lblStreak.BackColor = System.Drawing.Color.Transparent;
+            lblStreak.Dock = System.Windows.Forms.DockStyle.Top;
+            lblStreak.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            lblStreak.ForeColor = System.Drawing.Color.White;
+            lblStreak.Location = new System.Drawing.Point(0, 0);
+            lblStreak.Name = "lblStreak";
+            lblStreak.Size = new System.Drawing.Size(1237, 391);
+            lblStreak.TabIndex = 6;
+            lblStreak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmMain
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Black;
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -146,5 +171,7 @@ namespace HeroKeyboardGuitar {
         private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.Timer tmrScoreShrink;
         private System.Windows.Forms.Panel panBg;
+        private System.Windows.Forms.Label lblStreak;
+        private System.Windows.Forms.ProgressBar streakBar;
     }
 }

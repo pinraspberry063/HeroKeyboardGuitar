@@ -51,6 +51,7 @@ internal partial class FrmMain : Form
         score = new();
           
         lblScore.Text = score.Amount.ToString();
+        lblStreak.Text = "COMBO: " + score.Streak.ToString();
         panBg.BackgroundImage = Game.GetInstance().GetBg();
         panBg.Height = (int)(Height * 0.8);
         curSong = Game.GetInstance().CurSong;
@@ -154,6 +155,9 @@ internal partial class FrmMain : Form
             if (note.CheckMiss(currTarget))
             {
                 score.Miss();
+                streakBar.Value = 0;
+                lblStreak.Font = new("Arial", 10);
+                lblStreak.Text = "COMBO: " + score.Streak.ToString();
             }
         }
         if (index >= curSong.GetNumberOfSamples() - 1)

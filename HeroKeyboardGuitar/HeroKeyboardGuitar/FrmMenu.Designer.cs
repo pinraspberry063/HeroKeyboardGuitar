@@ -33,7 +33,7 @@ namespace HeroKeyboardGuitar
         {
             ModeDropDown = new ComboBox();
             btnplay = new Button();
-            button1 = new Button();
+            btnAddSong = new Button();
             label1 = new Label();
             DifficultyBox = new ComboBox();
             SuspendLayout();
@@ -57,7 +57,7 @@ namespace HeroKeyboardGuitar
             btnplay.UseVisualStyleBackColor = true;
             btnplay.Click += btnplay_Click;
             // 
-            // button1
+            // btnAddSong
             // 
             button1.Location = new System.Drawing.Point(236, 53);
             button1.Name = "button1";
@@ -98,7 +98,7 @@ namespace HeroKeyboardGuitar
             ClientSize = new System.Drawing.Size(799, 450);
             Controls.Add(DifficultyBox);
             Controls.Add(label1);
-            Controls.Add(button1);
+            Controls.Add(btnAddSong);
             Controls.Add(btnplay);
             Controls.Add(ModeDropDown);
             Name = "FrmMenu";
@@ -116,7 +116,7 @@ namespace HeroKeyboardGuitar
 
         private System.Windows.Forms.ComboBox ModeDropDown;
         private Button btnplay;
-        private Button button1;
+        private Button btnAddSong;
         private Label label1;
         public ComboBox DifficultyBox;
     }
