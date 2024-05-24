@@ -44,6 +44,7 @@
             // picTarget
             // 
             picTarget.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            
             picTarget.BackgroundImage = Properties.Resources._default;
             picTarget.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             picTarget.Location = new System.Drawing.Point(372, 498);
@@ -81,6 +82,7 @@
             panBg.Name = "panBg";
             panBg.Size = new System.Drawing.Size(1237, 480);
             panBg.TabIndex = 6;
+            
             // 
             // streakBar
             // 
@@ -121,12 +123,12 @@
             FormClosing += FrmMain_FormClosing;
             Load += FrmMain_Load;
             KeyDown += FrmMain_KeyDown;
-            KeyPress += FrmMain_KeyPress;
             KeyUp += FrmMain_KeyUp;
             ((System.ComponentModel.ISupportInitialize)picTarget).EndInit();
             panBg.ResumeLayout(false);
             ResumeLayout(false);
         }
+
 
         #endregion
         private System.Windows.Forms.Timer tmrPlay;
