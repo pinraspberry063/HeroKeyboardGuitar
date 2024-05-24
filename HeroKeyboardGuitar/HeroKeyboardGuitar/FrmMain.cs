@@ -11,9 +11,10 @@ namespace HeroKeyboardGuitar;
 internal partial class FrmMain : Form
 {
     private List<Note> notes;
-    private const float noteSpeed = 0.5f;
+    public float noteSpeed;
     private Audio curSong;
     private Score score;
+
 
     // for double buffering
     protected override CreateParams CreateParams
@@ -33,6 +34,8 @@ internal partial class FrmMain : Form
 
     public void FrmMain_Load(object sender, EventArgs e)
     {
+    public void FrmMain_Load(object sender, EventArgs e) {
+        noteSpeed = FrmTitle.NoteSpeed;
         score = new();
         lblScore.Text = score.Amount.ToString();
         panBg.BackgroundImage = Game.GetInstance().GetBg();
