@@ -15,6 +15,7 @@ internal partial class FrmMain : Form
     private const float noteSpeed = 0.5f;
     private Audio curSong;
     private Score score;
+    private Timer time;
 
     // for double buffering
     protected override CreateParams CreateParams
@@ -107,38 +108,55 @@ internal partial class FrmMain : Form
         }
     }
 
-    private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
-    {
-        foreach (var note in notes)
-        {
-            if (note.CheckHit(picTarget))
-            {
-                score.Add(1);
-                lblScore.Text = score.Amount.ToString();
-                lblScore.Font = new("Arial", 42);
-                break;
-            }
-        }
-    }
+  
+
+  
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e)
     {
+        // used to determine if key is being held down
+        time = new()
+        {
+            Interval = 10,
+            Enabled = true,
+        };
+        time.Start();
+        
         if (Game.GetInstance().mode == "Color Blind Mode")
         {
             picTarget.BackgroundImage = Resources.pressedcb;
         }
         else { picTarget.BackgroundImage = Resources.pressed; }
+        
+        
          
 
     }
 
     private void FrmMain_KeyUp(object sender, KeyEventArgs e)
     {
+        
         if (Game.GetInstance().mode == "Color Blind Mode")
         {
             picTarget.BackgroundImage = Resources.defaultcb;
         }
         else { picTarget.BackgroundImage = Resources._default; }
+
+        // Checks to see of the key is being held down or if it is actually being clicked
+        if (time.Interval < 1000)
+        {
+                foreach (var note in notes)
+                {
+                    if (note.CheckHit(picTarget))
+                    {
+                        score.Add(1);
+                        lblScore.Text = score.Amount.ToString();
+                        lblScore.Font = new("Arial", 42);
+                        break;
+
+                    }
+                }
+         }
         
     }
 
