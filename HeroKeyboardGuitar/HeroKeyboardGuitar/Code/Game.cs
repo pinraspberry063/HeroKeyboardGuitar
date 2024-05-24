@@ -3,7 +3,6 @@ using HeroKeyboardGuitar.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 
 namespace HeroKeyboardGuitar;
 
@@ -17,44 +16,23 @@ public class Game {
     /// Current song being played
     /// </summary>
     public Audio CurSong { get; private set; }
-    public string mode;
-    public string CurSongName { get; set; }
-
 
     /// <summary>
     /// Current genre of the song being played
     /// </summary>
     public GenreType CurSongGenre { get; private set; }
 
-    private static Game instance = new(FrmMenu.getSettings("mode"));
-   
-    private Game(string mode) {
-        this.mode = mode;
+    private static Game instance = new();
 
-        if (mode == "Color Blind Mode")
-        {
-            bgMap = new()
-            {
-                [GenreType.CLASSICAL] = Resources.classicalcb,
-                [GenreType.COUNTRY] = Resources.countrycb,
-                [GenreType.METAL] = Resources.metalcb,
-                [GenreType.POP] = Resources.popcb,
-                [GenreType.RNB] = Resources.rnbcb,
-                [GenreType.ROCK] = Resources.rockcb,
-            };
-
-        }else
-        {
-            bgMap = new()
-            {
-                [GenreType.CLASSICAL] = Resources.classical,
-                [GenreType.COUNTRY] = Resources.country,
-                [GenreType.METAL] = Resources.metal,
-                [GenreType.POP] = Resources.pop,
-                [GenreType.RNB] = Resources.rnb,
-                [GenreType.ROCK] = Resources.rock,
-            };
-        }  
+    private Game() {
+        bgMap = new() {
+            [GenreType.CLASSICAL] = Resources.classical,
+            [GenreType.COUNTRY] = Resources.country,
+            [GenreType.METAL] = Resources.metal,
+            [GenreType.POP] = Resources.pop,
+            [GenreType.RNB] = Resources.rnb,
+            [GenreType.ROCK] = Resources.rock,
+        };
     }
 
     /// <summary>
@@ -100,8 +78,5 @@ public class Game {
     public static void SetCurSong(string songFilePath, GenreType genre) {
         instance.CurSong = new(songFilePath);
         instance.CurSongGenre = genre;
-        var song = Path.GetFileNameWithoutExtension(songFilePath);
-        instance.CurSongName = song.Split('_')[0]; 
-
     }
 }

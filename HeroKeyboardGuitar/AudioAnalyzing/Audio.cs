@@ -28,7 +28,7 @@ public class Audio {
     /// Total number of bytes 
     /// </summary>
     public long StreamLengthInBytes { get; private set; }
-    
+
     /// <summary>
     /// Takes in a file path and starts analysis right away.
     /// Stores the results of that analysis

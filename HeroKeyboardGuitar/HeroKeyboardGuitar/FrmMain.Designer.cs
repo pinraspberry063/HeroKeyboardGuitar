@@ -115,7 +115,6 @@ namespace HeroKeyboardGuitar {
             panBg.Size = new System.Drawing.Size(1237, 480);
             panBg.SendToBack();
             panBg.TabIndex = 6;
-            
             // 
             // streakBar
             // 
@@ -157,13 +156,13 @@ namespace HeroKeyboardGuitar {
             FormClosing += FrmMain_FormClosing;
             Load += FrmMain_Load;
             KeyDown += FrmMain_KeyDown;
+            KeyPress += FrmMain_KeyPress;
             KeyUp += FrmMain_KeyUp;
             foreach (KeyValuePair<string, PictureBox> picTarget in pictargets)
                 ((System.ComponentModel.ISupportInitialize)picTarget.Value).EndInit();
             panBg.ResumeLayout(false);
             ResumeLayout(false);
         }
-
 
         #endregion
         private System.Windows.Forms.Timer tmrPlay;

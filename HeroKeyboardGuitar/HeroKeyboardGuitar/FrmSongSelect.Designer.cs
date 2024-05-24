@@ -22,11 +22,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-           
+        private void InitializeComponent() {
             SuspendLayout();
-            
             // 
             // FrmSongSelect
             // 
@@ -34,17 +31,13 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Black;
             ClientSize = new System.Drawing.Size(1060, 565);
-            
             Name = "FrmSongSelect";
             Text = "Select Song";
             WindowState = System.Windows.Forms.FormWindowState.Maximized;
             Load += FrmSongSelect_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-       
     }
 }

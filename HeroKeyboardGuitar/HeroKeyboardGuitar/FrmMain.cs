@@ -4,17 +4,15 @@ using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace HeroKeyboardGuitar;
 
-internal partial class FrmMain : Form
-{
+internal partial class FrmMain : Form {
     private List<Note> notes;
-    public float noteSpeed;
+    private const float noteSpeed = 0.5f;
     private Audio curSong;
     private Score score;
     private Timer time;
@@ -25,10 +23,8 @@ internal partial class FrmMain : Form
    
 
     // for double buffering
-    protected override CreateParams CreateParams
-    {
-        get
-        {
+    protected override CreateParams CreateParams {
+        get {
             var cp = base.CreateParams;
             cp.ExStyle |= 0x02000000;    // Turn on WS_EX_COMPOSITED
             return cp;
@@ -132,25 +128,21 @@ internal partial class FrmMain : Form
                 picNote.BackgroundImage = Resources.markercb;
             }     
         }
-        Timer tmrWaitThenPlay = new()
-        {
+        Timer tmrWaitThenPlay = new() {
             Interval = 1000,
             Enabled = true,
         };
         components.Add(tmrWaitThenPlay);
-        tmrWaitThenPlay.Tick += (e, sender) =>
-        {
+        tmrWaitThenPlay.Tick += (e, sender) => {
             Game.GetInstance().CurSong.Play();
             tmrWaitThenPlay.Enabled = false;
             tmrPlay.Enabled = true;
         };
     }
 
-    private void tmrPlay_Tick(object sender, EventArgs e)
-    {
+    private void tmrPlay_Tick(object sender, EventArgs e) {
         int index = curSong.GetPosition();
-        foreach (var note in notes)
-        {
+        foreach (var note in notes) {
             note.Move(tmrPlay.Interval * (noteSpeed * 1.3));
             if (note.CheckMiss(currTarget))
             {
@@ -160,11 +152,9 @@ internal partial class FrmMain : Form
                 lblStreak.Text = "COMBO: " + score.Streak.ToString();
             }
         }
-        if (index >= curSong.GetNumberOfSamples() - 1)
-        {
+        if (index >= curSong.GetNumberOfSamples() - 1) {
             tmrPlay.Enabled = false;
-            foreach (var note in notes)
-            {
+            foreach (var note in notes) {
                 Controls.Remove(note.Pic);
                 note.Dispose();
             }
@@ -261,32 +251,13 @@ internal partial class FrmMain : Form
 
     }
 
-    private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
-    {
+    private void FrmMain_FormClosing(object sender, FormClosingEventArgs e) {
         Game.GetInstance().CurSong.Stop();
-        var HighScore_File = $"{Application.StartupPath}../../../HighScores/" + Game.GetInstance().CurSongName + ".txt";
-        StreamReader sr = new StreamReader(HighScore_File);
-        var curr_hs =Int32.Parse(sr.ReadLine());
-        sr.Close();
-        if (curr_hs < Int32.Parse(lblScore.Text))
-        {
-            StreamWriter sw = new StreamWriter(HighScore_File, false);
-            sw.Write(lblScore.Text.ToString());
-            sw.Close();
-        }
-        // Reload the SongSelect Menu upon finishing a song
-        FrmMenu.SongMenu.Close();
-        FrmMenu.SongMenu = new FrmSongSelect();
-        FrmMenu.SongMenu.Show();
     }
 
-    private void tmrScoreShrink_Tick(object sender, EventArgs e)
-    {
-        if (lblScore.Font.Size > 20)
-        {
+    private void tmrScoreShrink_Tick(object sender, EventArgs e) {
+        if (lblScore.Font.Size > 20) {
             lblScore.Font = new("Arial", lblScore.Font.Size - 1);
         }
     }
-
-    
 }
