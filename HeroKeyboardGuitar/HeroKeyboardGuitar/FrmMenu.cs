@@ -23,7 +23,7 @@ namespace HeroKeyboardGuitar
             settings.Clear();
             InitializeComponent();
         }
-        
+
         public static string getSettings(string key)
         {
             return settings[key];
@@ -44,10 +44,11 @@ namespace HeroKeyboardGuitar
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = openFileDialog.FileName;
-                FrmGenreSelect genreSelect = new ();
+                FrmGenreSelect genreSelect = new();
                 genreSelect.ShowDialog();
-                if (genreSelect.ShowDialog() == DialogResult.OK) {
-                    
+                if (genreSelect.ShowDialog() == DialogResult.OK)
+                {
+
 
                     // Make sure chosen file has a .wav extension
                     if (Path.GetExtension(filePath).ToLower() == ".wav")
@@ -78,5 +79,25 @@ namespace HeroKeyboardGuitar
             }
         }
 
+        private void changeDifficulty(object sender, EventArgs e)
+        {
+            if (DifficultyBox.SelectedItem == null)
+            {
+                NoteSpeed = 0.5f;
+            }
+            else if (DifficultyBox.SelectedItem.ToString() == "Easy")
+            {
+                NoteSpeed = 0.25f;
+            }
+            else if (DifficultyBox.SelectedItem.ToString() == "Medium")
+            {
+                NoteSpeed = 0.5f;
+            }
+            else if (DifficultyBox.SelectedItem.ToString() == "Hard")
+            {
+                NoteSpeed = 0.75f;
+            }
+        }
+        public static float NoteSpeed = 0.5f;
     }
 }
