@@ -56,7 +56,8 @@ namespace HeroKeyboardGuitar {
             picTargetG.Size = new System.Drawing.Size(120, 120);
             picTargetG.TabIndex = 3;
             picTargetG.TabStop = false;
-            pictargets[""] = picTargetG;
+            pictargets["green"] = picTargetG;
+            pictargets["default"] = picTargetG;
             // 
             // picTargetred
             // 
@@ -64,20 +65,20 @@ namespace HeroKeyboardGuitar {
             picTargetR.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             picTargetR.BackgroundImage = Properties.Resources.default_red;
             picTargetR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            picTargetR.Location = new System.Drawing.Point(572, 498);
+            picTargetR.Location = new System.Drawing.Point(picTargetG.Left + 200, 498);
             picTargetR.Name = "picTargetR";
             picTargetR.Size = new System.Drawing.Size(120, 120);
             picTargetR.TabIndex = 3;
             picTargetR.TabStop = false;
             pictargets["red"] = picTargetR;
             // 
-            // picTargetred
+            // picTargetblue
             // 
             var picTargetB = new System.Windows.Forms.PictureBox();
             picTargetB.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             picTargetB.BackgroundImage = Properties.Resources.default_blue;
             picTargetB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            picTargetB.Location = new System.Drawing.Point(772, 498);
+            picTargetB.Location = new System.Drawing.Point(picTargetR.Left + 200, 498);
             picTargetB.Name = "picTargetB";
             picTargetB.Size = new System.Drawing.Size(120, 120);
             picTargetB.TabIndex = 3;

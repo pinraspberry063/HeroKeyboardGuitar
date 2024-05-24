@@ -42,19 +42,16 @@ namespace HeroKeyboardGuitar
             // 
             ModeDropDown.FormattingEnabled = true;
             ModeDropDown.Items.AddRange(new object[] { "Default", "Color Blind Mode" });
-            ModeDropDown.Location = new System.Drawing.Point(770, 391);
-            ModeDropDown.Margin = new Padding(4, 5, 4, 5);
+            ModeDropDown.Location = new System.Drawing.Point(279, 285);
             ModeDropDown.Name = "ModeDropDown";
-            ModeDropDown.Size = new System.Drawing.Size(284, 33);
+            ModeDropDown.Size = new System.Drawing.Size(225, 23);
             ModeDropDown.TabIndex = 1;
-            
             // 
             // btnplay
             // 
-            btnplay.Location = new System.Drawing.Point(792, 606);
-            btnplay.Margin = new Padding(4, 5, 4, 5);
+            btnplay.Location = new System.Drawing.Point(585, 363);
             btnplay.Name = "btnplay";
-            btnplay.Size = new System.Drawing.Size(186, 54);
+            btnplay.Size = new System.Drawing.Size(156, 38);
             btnplay.TabIndex = 2;
             btnplay.Text = "Play";
             btnplay.UseVisualStyleBackColor = true;
@@ -62,12 +59,11 @@ namespace HeroKeyboardGuitar
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(215, 390);
-            button1.Margin = new Padding(4);
+            button1.Location = new System.Drawing.Point(236, 53);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(118, 36);
+            button1.Size = new System.Drawing.Size(305, 72);
             button1.TabIndex = 3;
-            button1.Text = "button1";
+            button1.Text = "Upload Song";
             button1.UseVisualStyleBackColor = true;
             button1.Click += btnAddSong_Click;
             // 
@@ -75,9 +71,10 @@ namespace HeroKeyboardGuitar
             // 
             label1.AutoSize = true;
             label1.BackColor = System.Drawing.Color.WhiteSmoke;
-            label1.Location = new System.Drawing.Point(231, 514);
+            label1.Location = new System.Drawing.Point(351, 152);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(86, 25);
+            label1.Size = new System.Drawing.Size(58, 15);
             label1.TabIndex = 4;
             label1.Text = "Difficulty:";
             label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -86,27 +83,28 @@ namespace HeroKeyboardGuitar
             // 
             DifficultyBox.FormattingEnabled = true;
             DifficultyBox.Items.AddRange(new object[] { "Easy", "Medium", "Hard" });
-            DifficultyBox.Location = new System.Drawing.Point(191, 542);
+            DifficultyBox.Location = new System.Drawing.Point(279, 190);
+            DifficultyBox.Margin = new Padding(2);
             DifficultyBox.Name = "DifficultyBox";
-            DifficultyBox.Size = new System.Drawing.Size(182, 33);
+            DifficultyBox.Size = new System.Drawing.Size(225, 23);
             DifficultyBox.TabIndex = 5;
             DifficultyBox.SelectionChangeCommitted += changeDifficulty;
             // 
             // FrmMenu
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.WindowFrame;
-            ClientSize = new System.Drawing.Size(1142, 750);
+            ClientSize = new System.Drawing.Size(799, 450);
             Controls.Add(DifficultyBox);
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(btnplay);
             Controls.Add(ModeDropDown);
-            Margin = new Padding(4, 5, 4, 5);
             Name = "FrmMenu";
             Text = "Menu";
             WindowState = FormWindowState.Maximized;
+            Load += FrmMenu_Load;
             ResumeLayout(false);
             PerformLayout();
         }

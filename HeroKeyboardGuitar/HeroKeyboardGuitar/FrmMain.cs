@@ -1,10 +1,12 @@
 using AudioAnalyzing;
 using HeroKeyboardGuitar.Properties;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace HeroKeyboardGuitar;
@@ -17,7 +19,9 @@ internal partial class FrmMain : Form
     private Score score;
     private Timer time;
     private int xPos;
-    public PictureBox currTarget = new();
+    public PictureBox currTarget { get; private set; }
+    private Random random;
+
    
 
     // for double buffering
@@ -37,15 +41,20 @@ internal partial class FrmMain : Form
         InitializeComponent();
     }
 
+    public PictureBox GetCurrentTarget()
+    {
+        return this.currTarget;
+    }
     
     public void FrmMain_Load(object sender, EventArgs e) {
-        noteSpeed = FrmTitle.NoteSpeed;
+        noteSpeed = FrmMenu.NoteSpeed;
         score = new();
+          
         lblScore.Text = score.Amount.ToString();
         panBg.BackgroundImage = Game.GetInstance().GetBg();
         panBg.Height = (int)(Height * 0.8);
         curSong = Game.GetInstance().CurSong;
-        currTarget = pictargets[""];
+        currTarget = pictargets["default"];
         notes = new();
         xPos = currTarget.Left + currTarget.Width / 2;
         if (Game.GetInstance().mode == "Color Blind Mode")
@@ -54,15 +63,15 @@ internal partial class FrmMain : Form
         }
         foreach (var actionTime in curSong.ActionTimes)
         {
-            double yPos = (actionTime * noteSpeed - currTarget.Bottom - currTarget.Height);
+            double yPos = actionTime * noteSpeed - panBg.Height*40;
             const int noteSize = 50;
-            if (notes.Any(note => (yPos - note.Pic.Bottom) < noteSize / 2))
+            if (notes.Any(note => (yPos - note.Pic.Top) < noteSize / 2))
             {
                 continue;
             }
             PictureBox picNote = new()
             {
-                BackColor = Color.Black,
+                BackColor = Color.Transparent,
                 ForeColor = Color.Black,
                 Width = noteSize,
                 Height = noteSize,
@@ -70,9 +79,50 @@ internal partial class FrmMain : Form
                 Left = xPos - noteSize / 2,
                 BackgroundImage = Resources.marker,
                 BackgroundImageLayout = ImageLayout.Stretch,
-                Anchor = AnchorStyles.Bottom,
+                //Anchor = AnchorStyles.Bottom,
                 
             };
+            random = new();
+            
+            var rnd = random.Next(0, 3);
+           
+            switch(rnd)
+            {
+                
+                // green
+                case 0:
+                    currTarget = new();
+                    currTarget = pictargets["green"];
+                    xPos = currTarget.Left + currTarget.Width / 2 - noteSize / 2;
+
+                    picNote.BackgroundImage = Resources.marker;
+                    break;
+                // Red
+                case 1:
+                    currTarget = new();
+                    currTarget = pictargets["red"];
+                    xPos = currTarget.Left + currTarget.Width / 2 - noteSize / 2;
+
+                    picNote.BackgroundImage = Resources.marker_red;
+                    break;
+                // Blue
+                case 2:
+                    currTarget = new();
+                    currTarget = pictargets["blue"];
+                    xPos = currTarget.Left + currTarget.Width / 2 - noteSize / 2;
+                    
+                    picNote.BackgroundImage = Resources.marker_blue;
+                    break;
+                default:
+                    currTarget = new();
+                    currTarget = pictargets["default"];
+                    xPos = currTarget.Left + currTarget.Width / 2 - noteSize / 2;
+                    picNote.BackgroundImage = Resources.marker;
+                    break;
+                
+
+            }
+            picNote.Left = xPos;
             Controls.Add(picNote);
             picNote.BringToFront();
             notes.Add(new(picNote, xPos - noteSize / 2, yPos ));
@@ -131,11 +181,30 @@ internal partial class FrmMain : Form
         };
         time.Start();
         
+        switch(e.KeyCode)
+        {
+            case Keys.NumPad5:
+                currTarget = pictargets["red"];
+                currTarget.BackgroundImage = Resources.pressed_red;
+                break;
+            case Keys.NumPad4:
+                currTarget = pictargets["green"];
+                currTarget.BackgroundImage = Resources.pressed;
+                break;
+            case Keys.NumPad6:
+                currTarget = pictargets["blue"];
+                currTarget.BackgroundImage = Resources.pressed_blue;
+                break;
+            default:
+                break;
+
+
+        }
         if (Game.GetInstance().mode == "Color Blind Mode")
         {
             currTarget.BackgroundImage = Resources.pressedcb;
         }
-        else { currTarget.BackgroundImage = Resources.pressed; }
+        //else { currTarget.BackgroundImage = Resources.pressed; }
         
         
          
@@ -152,22 +221,40 @@ internal partial class FrmMain : Form
         else { currTarget.BackgroundImage = Resources._default; }
 
         // Checks to see of the key is being held down or if it is actually being clicked
+        
+        switch (e.KeyCode)
+        {
+            case Keys.NumPad5:
+                currTarget = pictargets["red"];
+                currTarget.BackgroundImage = Resources.default_red;
+                break;
+            case Keys.NumPad4:
+                currTarget = pictargets["green"];
+                currTarget.BackgroundImage = Resources._default;
+                break;
+            case Keys.NumPad6:
+                currTarget = pictargets["blue"];
+                currTarget.BackgroundImage = Resources.default_blue;
+                break;
+            default:
+                break;
+        }
         if (time.Interval < 1000)
         {
-                foreach (var note in notes)
+            foreach (var note in notes)
+            {
+                if (note.CheckHit(currTarget))
                 {
-                    if (note.CheckHit(currTarget))
-                    {
-                        score.Add(1);
-                        lblScore.Text = score.Amount.ToString();
-                        lblScore.Font = new("Arial", 42);
-                        
-                        break;
+                    score.Add(1);
+                    lblScore.Text = score.Amount.ToString();
+                    lblScore.Font = new("Arial", 42);
 
-                    }
+                    break;
+
                 }
-         }
-        
+            }
+        }
+
     }
 
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)

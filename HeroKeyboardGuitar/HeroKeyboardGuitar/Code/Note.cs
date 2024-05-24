@@ -67,7 +67,7 @@ public class Note {
     /// <param name="amount">Amount to move to the left</param>
     public void Move(double amount) {
         yPos += amount;
-        Pic.Left = (int)xPos;
+        //Pic.Left = (int)xPos;
         Pic.Top = (int)yPos;
     }
 
@@ -78,7 +78,7 @@ public class Note {
     /// <param name="picTarget">PictureBox object for player's target zone</param>
     /// <returns>True if note was just hit, false if it wasn't hit or was already previously hit</returns>
     public bool CheckHit(PictureBox picTarget) {
-        if (Pic.Left <= picTarget.Top + picTarget.Height && Pic.Top + Pic.Height > picTarget.Top && State == NoteState.TRAVELING) {
+        if (Pic.Bottom >= picTarget.Top && Pic.Top + Pic.Height < picTarget.Bottom && State == NoteState.TRAVELING) {
             if (Game.GetInstance().mode == "Color Blind Mode")
             {
                 Pic.BackgroundImage = Resources.marker_hitcb;
@@ -99,7 +99,7 @@ public class Note {
     /// <param name="picTarget">PictureBox object for player's target zone</param>
     /// <returns>True if note was just missed, false if it wasn't missed or was already previously missed</returns>
     public bool CheckMiss(PictureBox picTarget) {
-        if (Pic.Left < picTarget.Left && State == NoteState.TRAVELING) {
+        if (Pic.Top > picTarget.Bottom && State == NoteState.TRAVELING) {
             if (Game.GetInstance().mode == "Color Blind Mode")
             {
                 Pic.BackgroundImage = Resources.marker_misscb;

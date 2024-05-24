@@ -25,6 +25,8 @@ namespace HeroKeyboardGuitar
             InitializeComponent();
         }
 
+
+
         public static string getSettings(string key)
         {
             return settings[key];
@@ -33,7 +35,7 @@ namespace HeroKeyboardGuitar
         private void btnplay_Click(object sender, EventArgs e)
         {
             settings["mode"] = ModeDropDown.Text;
-            SongMenu = new FrmSongSelect(); 
+            SongMenu = new FrmSongSelect();
             SongMenu.Show();
         }
         private void btnAddSong_Click(object sender, EventArgs e)
@@ -100,5 +102,12 @@ namespace HeroKeyboardGuitar
             }
         }
         public static float NoteSpeed = 0.5f;
+
+        private void FrmMenu_Load(object sender, EventArgs e)
+        {
+            button1.Left = Width / 2 - button1.Width / 2;
+            button1.Top = (int)(Height * 0.65);
+
+        }
     }
 }
